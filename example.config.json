@@ -1,0 +1,31 @@
+{
+    "server": {
+        "database": {
+            "host" : {
+                "description": "The hostname for the database connection.",
+                "type": "string",
+                "value": "localhost"
+            },
+            "database" : {
+                "description": "The database name.",
+                "type": "string",
+                "value": "example_database"
+            },
+            "username" : {
+                "description": "The username for the database connection.",
+                "type": "string",
+                "value": "username"
+            },
+            "password" : {
+                "description": "The password for the database connection.",
+                "type": "string",
+                "value": "password"
+            },
+            "port" : {
+                "description": "The port for the database connection.",
+                "type": "integer",
+                "value": 1234
+            }
+        }
+    }
+}
