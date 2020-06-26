@@ -1,0 +1,23 @@
+{
+    "name": "bertmaurau/php-app-config",
+    "description": "A simple module to handle configuration for your application.",
+    "keywords": ["configuration", "module", "appconfig", "settings", "json", "webapp"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bert Maurau",
+            "email": "hello@bertmaurau.be"
+        }
+    ],
+    "type": "project",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "BertMaurau\\": "src/"
+        }
+    }
+}

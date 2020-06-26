@@ -14,28 +14,33 @@ class AppConfig
 
     /**
      * The configuration file
+     *
      * @var string $file
      */
     private static $file;
 
     /**
      * The loaded App Configuration
+     *
      * @var array $appConfig
      */
     private static $appConfig;
 
     /**
      * Load the requested configuration file
+     *
      * @param string $file The file to load (eg. /app/config.json)
      * @param bool $reload Reload the configuration from file
+     *
      * @return \BertMaurau\Serene\Config\Config
+     *
      * @throws Exception
      */
     public static function load(string $file = 'config.json', bool $reload = false)
     {
         // check if configuration has been loaded already
         if (self::$appConfig && !$reload) {
-            //
+            return;
         }
 
         // check if file exists
@@ -51,38 +56,49 @@ class AppConfig
             throw new Exception("Failed to parse file: {$ex -> getMessage()}");
         }
 
-        // assign to self
+        // assign filename for future reloads
         self::$file = $file;
+
+        // assign the loaded config
         self::$appConfig = $appConfig;
     }
 
     /**
      * Reload the current configuration from file
+     *
      * @return \BertMaurau\Serene\Config\Config
+     *
      * @throws Exception
      */
     public static function reload()
     {
+        // check if file is set by an initial load triggered before
         if (!self::$file) {
             throw new Exception("No configuration loaded.");
         }
 
+        // load the file again with force reload
         self::load(self::$file, true);
     }
 
     /**
      * Save the current configuration to file
+     *
      * @return bool Saved successfully
      */
     public static function save()
     {
+        // TODO: check for write permissions here
         return file_put_contents(self::$file, json_encode(self::$appConfig));
     }
 
     /**
      * Get the value for given setting
+     *
      * @param string $setting The setting to get
+     *
      * @return mixed The setting's value
+     *
      * @throws Exception
      */
     public static function setting(string $setting)
@@ -95,9 +111,10 @@ class AppConfig
         // split $setting
         $tree = explode('.', $setting);
 
-        // set the initial node
+        // set the initial node (root-node) to start from
         $currentNode = self::$appConfig;
 
+        // used for reference in exception
         $nodeString = 'AppConfig';
 
         // travert the nested settings
